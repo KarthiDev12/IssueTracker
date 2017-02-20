@@ -1,0 +1,59 @@
+<!--<form class = "well" (submit)="addTask($event)">
+<div class = "form-group">
+    <input type ="text" [(ngModel)]="title" name = "title" class="form-control" placeholder="Add Task..">
+    </div>
+
+</form>-->
+
+<form class = "well"  (ngSubmit)= "addTask($event)"  #userForm="ngForm" >
+    <div class="form-group">
+      <label for="name">User Name:</label>
+      <input type="text" class="form-control" id="name" required [(ngModel)]="name" name="name"  placeholder="Enter name"  >
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="email" required [(ngModel)]="email" name="email"  placeholder="Enter email" >
+    </div>
+    
+   <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input type="password" class="form-control" required  [(ngModel)]="password" name="password" id="password"  placeholder="Enter password" >
+    </div>
+     <div class="form-group">
+      <label for="project">Project:</label>
+      <input type="text"  [(ngModel)]="project" name="project"  class="form-control" id="project" placeholder="Enter project" >
+    </div>
+       
+
+    <div class="form-group">
+     
+            <label for="skill">SKILL SET</label>
+            <br>
+             <b>Search for skills</b>
+             <br>
+              <input id="skill" class="form-control" name ="skill" type="text" [(ngModel)]=query (keyup)=filter() placeholder="JAVA,.NET ,Node, Angular2.....">
+              
+          
+             <div class="suggestions" *ngIf="filteredList.length > 0">
+              <ul *ngFor="let item of filteredList" >
+               <li >
+                <a (click)="select(item)">{{item}}</a>
+               </li>
+             </ul>
+          </div>
+           
+             <b>Selected skills</b>
+             <br>
+          <div *ngFor="let item of skills">
+             <div class="selected" >
+              <span>{{item}}</span>
+              <a (click)="remove(item)">x</a>
+         </div>
+    </div>
+      <!--<label for="skill">Skill:</label>
+      <input type="text" class="form-control" [(ngModel)]="skills" name="skills" id="skills"  placeholder="Enter skill" >-->
+    </div>
+   <br>
+   <br>
+    <button type="submit" class="btn btn-default" [disabled]="!userForm.form.valid" >Submit</button>
+  </form>
