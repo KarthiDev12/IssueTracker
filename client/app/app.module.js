@@ -15,6 +15,9 @@ var user_component_1 = require("./components/users/user.component");
 //import { SkillsComponent }   from './components/users/skills.component';
 var alert_services_1 = require("./components/alerts/alert.services");
 var alert_component_1 = require("./components/alerts/alert.component");
+var login_service_1 = require("./components/services/login.service");
+var home_component_1 = require("./components/login/home.component");
+var login_components_1 = require("./components/login/login.components");
 require("rxjs/Rx");
 var AppModule = (function () {
     function AppModule() {
@@ -26,8 +29,8 @@ AppModule = __decorate([
         imports: [
             platform_browser_1.BrowserModule, http_1.HttpModule, forms_1.FormsModule, app_routing_module_1.AppRoutingModule,
         ],
-        declarations: [app_component_1.AppComponent, user_component_1.UserComponent, alert_component_1.AlertComponent],
-        providers: [alert_services_1.AlertService],
+        declarations: [app_component_1.AppComponent, user_component_1.UserComponent, alert_component_1.AlertComponent, login_components_1.LoginComponents, home_component_1.HomeComponent],
+        providers: [alert_services_1.AlertService, login_service_1.LoginServices],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);

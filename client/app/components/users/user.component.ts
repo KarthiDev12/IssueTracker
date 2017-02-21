@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {UserService} from './user.service';
 import {User} from '../../../User';
 import { AlertService} from '../alerts/alert.services';
-
+import { Router } from '@angular/router';
 @Component({
 
   moduleId: module.id,
@@ -18,7 +18,7 @@ export class UserComponent {
     password:string;   
     project:string;
     id:number;
-  constructor(private taskService:UserService,private alertService: AlertService){  
+  constructor(private taskService:UserService,private alertService: AlertService,private router: Router){  
      
   //this.taskService.getTasks().then( tasks => this.tasks = tasks)
   }
@@ -38,8 +38,10 @@ export class UserComponent {
     }
    
     this.taskService.addUser(newUser).subscribe(data => {
-                    this.alertService.success('User created successfully', true);
+                    this.alertService.success('User created successfully', false);
                     this.clearUser();
+                    console.log("Inside submit"+newUser.name);
+                    this.router.navigate(['/home',newUser.name]);
                    
                 },
                 error => {

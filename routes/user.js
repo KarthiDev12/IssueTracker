@@ -3,7 +3,7 @@ var router = express.Router();
 var mongojs = require('mongojs');
 var db = mongojs('mongodb://10.240.151.26/company',['profile']);
 
-//Get All Task
+//Get All Users
 router.get('/users', function(req,res,next){   
     db.profile.find(function(err,tasks){
         if(err){
@@ -26,7 +26,7 @@ router.get('/task/:id', function(req,res,next){
     })
 });
 
-//Save Task 
+//Save User
 router.post('/user', function(req,res,next){
     console.log("Entered Save service");
     var user = req.body;
@@ -48,7 +48,7 @@ router.post('/user', function(req,res,next){
   
 });
 
-// delte task
+// delte User
 router.delete('/user/:id', function(req,res,next){
    console.log("Delteid"+mongojs.ObjectId(req.params.id));
     db.profile.remove({_id:mongojs.ObjectId(req.params.id)},function(err,task){
@@ -61,7 +61,7 @@ router.delete('/user/:id', function(req,res,next){
 });
 
 
-//Update Task
+//Update User
 router.put('/user/:id', function(req,res,next){
     var user = req.body;
     var updUser = {};
@@ -95,4 +95,20 @@ router.put('/user/:id', function(req,res,next){
     //res.send('TASK API')
    
 });
+
+
+router.get('/task/:username/:password', function(req,res,next){
+    //res.send('TASK API')
+    db.profile.findOne({name:req.params.username,password:req.params.password},function(err,user){
+        if(err){
+            res.send(err);
+        }
+       //if(!user){
+       //res.send({
+       //  "error":"fail"
+    // }); 
+   //  }
+        res.json(user);
+    })
+}); 
 module.exports = router;

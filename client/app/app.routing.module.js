@@ -7,7 +7,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
-var routes = [];
+var home_component_1 = require("./components/login/home.component");
+var login_components_1 = require("./components/login/login.components");
+var user_component_1 = require("./components/users/user.component");
+var routes = [
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: 'home/:username', component: home_component_1.HomeComponent },
+    { path: 'login', component: login_components_1.LoginComponents },
+    { path: 'user', component: user_component_1.UserComponent },
+    { path: '**', redirectTo: '' }
+];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {
     }
@@ -15,7 +24,7 @@ var AppRoutingModule = (function () {
 }());
 AppRoutingModule = __decorate([
     core_1.NgModule({
-        imports: [router_1.RouterModule.forRoot(routes)],
+        imports: [router_1.RouterModule.forRoot(routes, { useHash: true })],
         exports: [router_1.RouterModule]
     })
 ], AppRoutingModule);

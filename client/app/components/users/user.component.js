@@ -11,10 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var user_service_1 = require("./user.service");
 var alert_services_1 = require("../alerts/alert.services");
+var router_1 = require("@angular/router");
 var UserComponent = (function () {
-    function UserComponent(taskService, alertService) {
+    function UserComponent(taskService, alertService, router) {
         this.taskService = taskService;
         this.alertService = alertService;
+        this.router = router;
         this.query = '';
         this.skillList = ["JAVA", ".NET", "C++", "C", "PHP", "NODE",
             "ANGULAR2", "MONGO", "MYSQL", "EXPRESS",
@@ -38,8 +40,10 @@ var UserComponent = (function () {
             project: this.project
         };
         this.taskService.addUser(newUser).subscribe(function (data) {
-            _this.alertService.success('User created successfully', true);
+            _this.alertService.success('User created successfully', false);
             _this.clearUser();
+            console.log("Inside submit" + newUser.name);
+            _this.router.navigate(['/home', newUser.name]);
         }, function (error) {
             _this.alertService.error(error);
         });
@@ -92,7 +96,7 @@ UserComponent = __decorate([
         providers: [user_service_1.UserService],
         templateUrl: 'user.component.html'
     }),
-    __metadata("design:paramtypes", [user_service_1.UserService, alert_services_1.AlertService])
+    __metadata("design:paramtypes", [user_service_1.UserService, alert_services_1.AlertService, router_1.Router])
 ], UserComponent);
 exports.UserComponent = UserComponent;
 //# sourceMappingURL=user.component.js.map
